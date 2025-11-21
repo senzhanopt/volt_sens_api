@@ -9,6 +9,6 @@ class MeasurementIn(BaseModel):
     """
     timestamp: Optional[datetime]
     bus_id: str
-    p_mw: Optional[float] = None
-    q_mvar: Optional[float] = None
+    p_kw: Optional[float] = None
+    q_kvar: Optional[float] = None
     v_pu: Optional[float] = None
