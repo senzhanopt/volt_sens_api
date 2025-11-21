@@ -8,7 +8,7 @@ class MeasurementIn(BaseModel):
     Any of p_mw, q_mvar, or v_pu can be null.
     """
     timestamp: Optional[datetime]
-    bus_id: int
+    bus_id: str
     p_mw: Optional[float] = None
     q_mvar: Optional[float] = None
     v_pu: Optional[float] = None
