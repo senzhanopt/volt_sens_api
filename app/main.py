@@ -19,6 +19,16 @@ def index():
         "message": "Welcome to the VoltSens API Demo!"
     }
 
+@app.post("/meas")
+def create_meas(meas: MeasurementIn, session: Session = Depends(get_session)):
+    """
+    Store a new measurement.
+    """
+    stmt = insert(Measurement).values(**meas.dict(exclude_unset=True))
+    session.execute(stmt)
+    session.commit()
+    return {"status": "ok"}
+
 @app.get("/meas", response_model=List[Dict])
 def read_measurements(session: Session = Depends(get_session),
         limit: int = Query(100, description="Max number of rows to return")):
@@ -31,8 +41,8 @@ def read_measurements(session: Session = Depends(get_session),
         {
             "id": m.id,
             "bus_id": m.bus_id,
-            "p_mw": m.p_kw,
-            "q_mvar": m.q_kvar,
+            "p_kw": m.p_kw,
+            "q_kvar": m.q_kvar,
             "v_pu": m.v_pu,
             "timestamp": m.timestamp.isoformat() if m.timestamp else None
         }
@@ -40,14 +50,3 @@ def read_measurements(session: Session = Depends(get_session),
     ]
 
     return result
-
-@app.post("/meas")
-def create_meas(meas: MeasurementIn, session: Session = Depends(get_session)):
-    """
-    Store a new measurement.
-    """
-    stmt = insert(Measurement).values(**meas.dict(exclude_unset=True))
-    session.execute(stmt)
-    session.commit()
-    return {"status": "ok"}
-
