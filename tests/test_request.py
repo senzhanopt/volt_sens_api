@@ -25,7 +25,7 @@ def test_post():
     print(requests.post("http://127.0.0.1:8000/meas", json=data).json())
 
 def test_get():
-    print(requests.get("http://127.0.0.1:8000/meas?10").json())
+    print(requests.get("http://127.0.0.1:8000/meas?limit=1").json())
 
 # Map names to functions
 funcs = {
