@@ -25,13 +25,21 @@ def test_post():
     print(requests.post("http://127.0.0.1:8000/meas", json=data).json())
 
 def test_get():
-    print(requests.get("http://127.0.0.1:8000/meas?limit=2").json())
+    print(requests.get("http://127.0.0.1:8000/meas?limit=50").json())
+
+def test_delete_one():
+    print(requests.delete("http://127.0.0.1:8000/meas/4").json())
+
+def test_delete():
+    print(requests.delete("http://127.0.0.1:8000/meas", json = [5,6,7,8,9]).json())
 
 # Map names to functions
 funcs = {
     "index": test_index,
     "post": test_post,
-    "get": test_get
+    "get": test_get,
+    "del_one": test_delete_one,
+    "del": test_delete
 }
 
 if __name__ == "__main__":
