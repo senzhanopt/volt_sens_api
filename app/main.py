@@ -10,11 +10,6 @@ from app.models import Measurement
 
 app = FastAPI(title = "Grid Measurement API Demo")
 
-@app.on_event("startup")
-def startup() -> None:
-    """Create tables on startup."""
-    Base.metadata.create_all(bind=engine)
-
 @app.get("/")
 def index():
     """
