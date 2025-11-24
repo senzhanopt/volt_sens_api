@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, String, TIMESTAMP, func
+from sqlalchemy import Column, Integer, Float, String, TIMESTAMP, text
 from app.db import Base
 
 class Measurement(Base):
@@ -6,7 +6,7 @@ class Measurement(Base):
     __tablename__ = "measurements"
 
     id: int = Column(Integer, primary_key=True)
-    timestamp = Column(TIMESTAMP(timezone=True), server_default=func.now())
+    timestamp = Column(TIMESTAMP(timezone=True), server_default=text("timezone('UTC', now())"))
     bus_id: str = Column(String, index=True)
     p_kw: float = Column(Float, nullable=True)
     q_kvar: float = Column(Float, nullable=True)
