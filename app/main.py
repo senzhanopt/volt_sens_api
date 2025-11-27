@@ -4,7 +4,7 @@ from fastapi import Body, Depends, FastAPI, HTTPException, Query
 from sqlalchemy import delete, insert
 from sqlalchemy.orm import Session
 
-from app.db import Base, engine, get_session
+from app.db import get_session
 from app.models import Measurement
 from app.schemas import MeasurementIn, MeasurementOut
 
